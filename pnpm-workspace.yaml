@@ -1,5 +1,4 @@
 packages:
-  - slides/**
   - SPCE301/**
 
 catalog:
