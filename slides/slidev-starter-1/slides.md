@@ -1,641 +1,486 @@
 ---
-# You can also start simply with 'default'
-theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: /background.webp
-# some information about your slides (markdown enabled)
-title: Slidev Start 1
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply unocss classes to the current slide
-class: text-center
-# https://sli.dev/features/drawing
-drawings:
-  persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
-transition: slide-left
-# enable MDC Syntax: https://sli.dev/features/mdc
-mdc: true
-author: Leo Chiu
-# open graph
-seoMeta:
-  ogTitle: Slidev Starter 1
-  ogDescription: Presentation slides for developers - Slidev Starter 1
-routerMode: hash
----
-
-# Slidev Starter 1
-
-Presentation slides for developers
-
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
-</div>
-
-<div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-github />
-  </a>
-</div>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
----
-transition: fade-out
----
-
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
-
----
-transition: slide-up
-level: 2
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
-
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1" />
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc text-sm minDepth="1" maxDepth="2" />
-
----
-layout: image-right
-image: https://cover.sli.dev
----
-
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover!
-
-```ts [filename-example.ts] {all|4|6|6-7|9|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="342" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-level: 2
----
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
+title: SPCE 301 Week 01
+theme: Seriph
+revealOptions:
+  transition: 'fade'
 
 ---
 
-# Components
+# Welcome to SPCE301!
 
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
+Yvette Perrott, Betina Pavri and Uli Zuelicke
 
 ---
 
-# Clicks Animations
+## Plan for the course
 
-You can add `v-click` to elements to add a click animation.
+<v-clicks>
 
-<div v-click>
+- Bring together all the elements learned so far in SPCE101 and 201 (plus some more)
+- Design your own mission!
+- We will start by coming up with mission concepts in small groups (~3 people)
+- At the end of Week 3 you will present your concepts to the class
+- We will downselect to a single mission concept for developing further
 
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn more](https://sli.dev/guide/animations#click-animation)
-
-</div>
+</v-clicks>
 
 ---
 
-# Motions
+## Assessments
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+<v-clicks>
 
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
+* 10 lab sessions (30%) 
+  * Marking will be a bit more strict than previously, some component expected to be completed outside of class 
+* Peer feedback (5%) 
+* Project management log (5%)
+* Initial design document and presentation (10%) 
+* Mid-design document (20%) 
+* Final design document and presentation (30%) 
 
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
+</v-clicks>
 
 ---
 
-# LaTeX
+## Use of AI
 
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
+* Okay to use AI to aid learning
+  * Need clear statements on how AI was used for learning
+  * Submit your AI prompts 
+* All writing has to be own work. No AI allowed.
+  * If AI is used to help improve language, submit the original and the final output. 
 
 ---
 
-# Diagrams
+## Nuku
 
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
+[Make sure you look through Nuku](https://nuku.wgtn.ac.nz/courses/33216)/
 
 ---
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
+layout: iframe-right
+url: https://pressbooks-dev.oer.hawaii.edu/epet302/
+class: my-cool-content-on-the-left
 ---
 
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/imported-slides.md
-hide: false
----
+## Recommended reading
 
 ---
 
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
+## SPCE301 Week 01:
+# Mission design overview
 
 ---
-layout: center
-class: text-center
+
+## Module Learning Objectives
+
+<v-clicks>
+
+- Elements of space missions that must be considered to build a successful mission
+- Science or engineering questions as primary drivers of mission concepts and requirements
+- Funding of space missions
+
+</v-clicks>
+
 ---
 
-# Learn More
+### Mission components/mission architecture
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+<figure>
+<img src="/Images/mission_components.png" width="80%"/>
+<figcaption>Adapted from <a href="https://pressbooks-dev.oer.hawaii.edu/epet302/chapter/3-3-mission-components/">Zhu, Chap 3.3</a>.</figcaption>
+</figure>
 
-<PoweredBySlidev mt-10 />
+---
+
+### Mission components - subject
+
+1.  The *subject* of the mission is the thing that is sensed by or interacts with the space payload.  <br><br>
+
+<v-clicks>
+
+- This can be a *passive subject* (eg the fire in the FireSat example we considered previously) or an *active subject* (eg GPS receivers, direct broadcast television dishes).
+- In the case of the passive subject, the mission designers don't control the subject itself but do control how the mission interacts with or senses it
+- In the case of the active subject, the mission designers can directly control its design and basic parameters.
+
+</v-clicks>
+
+---
+
+### Mission components - payload
+
+2. The *payload* consists of the hardware and software that sense or interact with the subject.<br><br>
+
+<v-clicks>
+
+- If the subject is the "what", the payload is the "how".  
+- As shown in the diagram, the subject defines the payload requirements.  
+- We will investigate the relationship between the subject and payload further in this week's lab activity.
+
+</v-clicks>
+
+---
+
+### Mission components - spacecraft bus
+
+3. The *spacecraft bus* consists of a set of subsystems that support the payload by providing orbit and attitude maintenance, power, data handling, etc.<br><br>
+
+<v-clicks>
+
+- The payload and spacecraft bus together are called the *spacecraft, space segment* or *launch vehicle payload*.  
+- As indicated by the thick arrow in the diagram above, the payload requirements are the main driver for the design of the spacecraft bus.
+
+</v-clicks>
+
+---
+
+### Mission components - launch system
+
+4. The *launch system* includes the launch facility, launch vehicle and any upper stage required to place the spacecraft in orbit, as well as interfaces, payload fairing and associated ground support equipment and facilities.<br><br>
+
+<v-clicks>
+
+- The launch system which will be used also generally drives the payload design, unless the whole launch system is being designed from scratch to accommodate a specific payload (which would be unusual).
+
+</v-clicks>
+
+---
+
+### Mission components - orbit
+
+5. The *orbit* is the spacecraft's path or trajectory in space.<br><br>
+
+<v-clicks>
+
+- Typically, there is a separate initial parking orbit, transfer orbit and final mission orbit.  There may also be an end-of-life/disposal orbit.  
+- The orbit determines the space environment that the payload will experience, which also drives some aspects of its design.
+
+</v-clicks>
+
+---
+
+### Mission components - C3
+
+6. The *command, control and communications (C3) architecture* is the arrangement of components that satisfy the mission's C3 requirements.<br><br>
+
+<v-clicks>
+
+- This depends on the amount of data and timing requirements for the data to be transferred, as well as the number, location, availability and communicating ability of the space and ground assets.
+- Crucial decision: how much autonomy to design into the system? Autonomy is expensive and difficult to test comprehensively, but may be necessary.
+
+</v-clicks>
+
+---
+
+### Mission components - ground system
+
+7. The *ground system* consists of the facilities and communications equipment associated with both fixed and mobile ground stations around the world, connected by data links.<br><br>
+
+<v-clicks>
+
+- The choice of communication frequency is a critical part of this architecture.
+
+</v-clicks>
+
+---
+
+### Mission components - mission operations
+
+8. *Mission operations* consist of the people, computers and software that execute the mission operations and assess the data returned.<br><br>
+
+<v-clicks>
+
+- They can be a separate team in the case of a big project, or the team that designs the mission can also be the mission operations team in smaller projects.
+
+</v-clicks>
+
+---
+
+### Space Mission Engineering process
+
+How do we go about designing all these different mission components?  We start by thinking about the *mission objective*.  There are two general categories we can think about here:
+
+1) *Needs-based missions*: we want to fulfil a specific set of mission objectives.  For example, monitoring concentrations of CO$_2$ in the atmosphere, landing humans on the Moon, or observing astronomical objects in the infrared.
+
+2) *Capability-based missions*: we have developed a new capability and we want to see what we can do with it.  An example of this might be the electric propulsion technology being developed at RRI.
+
+---
+
+### Mission novelty
+
+Note that missions are funded because they’re doing something fundamentally new, whether that's science, engineering, or capability development.  Proposers should know: 
+
+- What has been done before?  
+- What is the current state of the art and how will the proposed mission advance that?
+
+---
+
+### Needs-based mission categories
+
+<figure>
+<img src="/Images/mission_engineering_process2.png" width="80%"/>
+<figcaption>The wide range of space mission applications.  Adapted from Fig 1-15, New SMAD.</figcaption>
+</figure>
+
+---
+
+### Space mission design process
+
+<figure>
+<img src="/Images/mission_engineering_process.png" width="80%"/>
+<figcaption>Adapted from Table 3-1, New SMAD.</figcaption>
+</figure>
+
+---
+
+### Space mission design process
+
+- We will obviously not have time to go through all these steps in this course
+- We will go through steps 1 to 4, (partially) define one mission architecture (step 5) and then skip straight to steps 13 and 14
+- Our mission will not actually fly :(
+
+---
+
+### Step 1: mission objectives
+
+- What are we trying to do with our mission?  Why?
+
+---
+
+### Eg: FireSat
+
+<ul>
+    <li>Primary objective:</li>
+        <ul>
+            <li>to detect, identify, monitor and report forest fires throughout the USA, including Alaska and Hawaii, in near real time and low cost.</li>
+        </ul>
+    <li>Secondary objectives:
+        <ul>
+            <li>to demonstrate to the public that positive action is underway to contain forest fires.</li>
+            <li>to collect statistical data on the outbreak and growth of forest fires.</li>
+            <li>to monitor forest fires for other countries.</li>
+            <li>to collect other forest management data.</li>
+        </ul>
+    </li>
+</ul>
+
+---
+
+### Step 1: mission objectives
+
+- These objectives are very broad and high-level.  
+- The rest of the design process determines exactly how and with what level of accuracy they will be achieved, and the technical requirements to achieve them. 
+- But the aim of the overall mission is to meet these fundamental requirements.
+
+---
+
+### Needs-based missions
+
+<figure>
+<img src="/Images/mission_engineering_process2.png" width="80%"/>
+<figcaption>The wide range of space mission applications.  Adapted from Fig 1-15, New SMAD.</figcaption>
+</figure>
+
+---
+
+### Step 5: mission components
+
+- Skipping forward a bit: what kind of technology do we need to achieve our high-level objective?
+
+---
+
+### Eg: FireSat
+
+- Our high-level objective has defined our subject: fires, which are a passive subject to be sensed.  
+- How could we sense them?  
+- Fires give out heat and light, so we could use thermal or optical sensors to detect them
+- They also produce chemicals and particles in the atmosphere that we might be able to detect as well.
+
+---
+
+### Needs-based missions
+
+<figure>
+<img src="/Images/mission_engineering_process2.png" width="80%"/>
+<figcaption>The wide range of space mission applications.  Adapted from Fig 1-15, New SMAD.</figcaption>
+</figure>
+
+---
+
+### Why do we need space?
+
+- Going to space is expensive so it's important to consider whether we really need to do it!
+- Some reasons include:
+   - Global perspective
+   - Above the atmosphere
+   - Gravity-free environment
+   - Abundant resources
+   - Exploration of space itself
+
+---
+
+### Science Traceability Matrix
+
+- A tool that has been developed to help address these questions and break them down in a systematic way is the "[Science Traceability Matrix](https://psyche.asu.edu/science-traceability-matrix/)" (STM).  
+- We will use these to help develop your initial mission proposals.
+
+---
+
+Here is a description of the different parts of the STM:
+
+<figure>
+<img src="/Images/Science-Traceability-Matrix-Example_1.png" width="100%"/>
+<figcaption>From <a href="https://psyche.asu.edu/science-traceability-matrix/">NASA's Psyche mission</a>.</figcaption>
+</figure>
+
+---
+
+Here is a description of the different parts of the STM:
+
+<figure>
+<img src="/Images/Science-Traceability-Matrix-Example_2.png" width="100%"/>
+<figcaption>From <a href="https://psyche.asu.edu/science-traceability-matrix/">NASA's Psyche mission</a>.</figcaption>
+</figure>
+
+---
+
+And an example of an STM for the Psyche mission:
+
+<figure>
+<img src="/Images/Science-Traceability-Matrix-Example-Table-1.png" width="70%"/>
+<figcaption>From <a href="https://psyche.asu.edu/science-traceability-matrix/">NASA's Psyche mission</a>.</figcaption>
+</figure>
+
+---
+layout: iframe
+url: http://www.csc.caltech.edu/references/2005%20Weiss%20et%20al%20IEEE%20STM.pdf
+---
+
+Another example:
+
+
+---
+
+## Starting point for your mission design
+
+- What is the objective of your mission?
+- Why is it important to do this?
+- What similar things have been done before and why is your mission different/better?
+- What kind of measurements do you need to make?
+- What kind of technology could you use to achieve it?
+- Why do you need to go to space to do it?
+
+---
+
+## Lab activity
+
+Research at least two real space missions in detail.  They can be past, active or proposed.  Answer the "starting point" questions for these missions, fill out an STM and add any other details you think are important.  Some suggestions are:
+
+- <a href="https://emit.jpl.nasa.gov/">EMIT</a>
+- <a href="https://nisar.jpl.nasa.gov/">NISAR</a>
+- <a href="https://misr.jpl.nasa.gov/">MISR</a>
+- <a href="https://grace.jpl.nasa.gov/">GRACE</a>
+
+---
+
+## Funding space missions
+
+- So you have your great idea for a mission, but how do you get it funded so you can build it?  
+- Most of us are not billionaires who can fund things out of our own pockets, and so it's important to know about the funding "landscape" both here in NZ and internationally.
+
+---
+
+### Governmental funding
+
+- In most countries, funding is available in some way through the government
+- These funds are generally available through submitting a proposal to a call 
+- Proposals are typically assessed by a panel, and the best ones selected to receive funding.  
+- You will be competing for a limited amount of funding so your proposal has to be convincing!
+
+---
+
+### NZ-based funding
+
+- Government funding in NZ is mostly available through the Ministry of Business, Innovation and Employment.
+- For example, Paihau - Robinson Research Institute has received funding from the [Catalyst Fund](https://www.mbie.govt.nz/science-and-technology/science-and-innovation/funding-information-and-opportunities/investment-funds/catalyst-fund) (as part of a strategic partnership with the German Aerospace Centre, DLR) for some of their work.  
+- Other relevant funds include the Endeavour fund (Smart Ideas and Research Programmes).
+
+---
+
+### NZ-based funding
+
+- Also available through the [Royal Society Te Apārangi](https://www.royalsociety.org.nz/what-we-do/funds-and-opportunities/) are various research fellowships and/or funds such as the Marsden Fund 
+- These could be used to fund the initial development of ideas leading to a mission, as the seed leading to a larger application to actually build and launch the mission.
+
+---
+
+### Science prioritization
+
+- In the US, the National Academies of Science, Engineering and Medicine produce several "[decadal surveys](https://science.nasa.gov/about-us/science-strategy/decadal-surveys/)" which map out strategic priorities and mission directives across the next decade.  
+- Those relevant to space are in Astrophysics, Planetary Science, Earth Science, Heliophysics and Biological and Physical Sciences.  
+- The decadal surveys are carried out by a panel of subject experts, and researchers in the community have the opportunity to submit ideas and white papers.  
+- They identify key questions and make recommendations about which missions are the most important to fund over the next decade.  
+
+---
+
+### "Origins, Worlds, and Life: A Decadal Strategy for Planetary Science and Astrobiology 2023-2032"
+
+[Interactive viewer](https://nap.nationalacademies.org/resource/26522/interactive/)
+
+---
+
+### Science prioritization
+
+- The very high-level "Science Goal" in an STM often connects with priorities identified in a decadal review.
+- NASA releases calls for proposals, to which you can apply for funding for projects in various different categories.  
+- For example the annual "Research Opportunities in Space and Earth Sciences" funds US-based researchers for projects in various subject areas linked to the decadal surveys.
+- There are also "[Announcements of Opportunities](https://soma.larc.nasa.gov/)" (larger projects).  
+- Non-US-based researchers can be involved in the proposals but cannot receive funding.
+
+---
+
+### Science prioritization
+
+- The European Space Agency has a similar series of science programmes, the most recent of which is [Voyage 2050](https://www.esa.int/Science_Exploration/Space_Science/Voyage_2050_sets_sail_ESA_chooses_future_science_mission_themes).
+- NZ is an [associated country of Pillar 2 of the Horizon Europe research funding system](https://www.mbie.govt.nz/science-and-technology/science-and-innovation/international-opportunities/horizon-europe-research-fund), which means that NZ-based researchers can join or lead Horizon Europe funding.  
+- Of particular interest is Cluster 4 (Digital, Industry and Space).  
+- They also issue calls for proposals in various areas related to the research priorities.  You can see some of the projects funded in 2024 [here](https://defence-industry-space.ec.europa.eu/results-horizon-europe-space-related-calls-work-programme-2023-2024-implemented-hadea-and-euspa_en).
+
+---
+
+### Science prioritization
+
+- While not quite at the same level, in NZ we do have a [Space and Advanced Aviation Strategy for 2024 to 2030](https://www.mbie.govt.nz/science-and-technology/space/new-zealand-space-and-advanced-aviation-strategy)
+- This sets out ambitions and priorities for the space sector in this country.  
+- Aligning to this strategy will likely be helpful for funding applications going forward.
+
+---
+
+### Commercial funding
+
+- If you have an idea which could be commercializable, another route is seeking backing from private investors.  
+- This doesn't have to be mutually exclusive with governmental funding - for example, Dawn Aerospace initially [received funding from the Catalyst fund](https://www.dawnaerospace.com/latest-news/nzsa-backs-dawn), which helped them develop their technology to the point of being attractive to [commercial funders](https://www.dawnaerospace.com/latest-news/dawn-aerospace-secures-funding-from-nzs-largest-venture-capital-firm-movac).
+- For more on Dawn Aerospace and their startup journey, listen to [this WFLS podcast](https://www.youtube.com/watch?v=ry_LIUKrx7U) (from about 45:30, but the whole podcast is really interesting).
+
+---
+
+### Military funding
+
+- Space and the military have always been entangled, and this could be another important source of funding if your idea has a military application.  
+- For example, the US Space Force has requested a [$USD29.4 billion budget](https://www.defense.gov/News/News-Stories/Article/Article/3705820/space-force-chief-says-shift-to-warfighting-posture-continues-despite-slight-bu/) for the 2025 financial year.  
+- Accessing that funding might be more complicated and subject to citizenship requirements.  
+- In NZ, border and bio-security concerns could lead to funding availability as well, for example monitoring territorial waters for illegal fishing.
+
+---
+
+### Philanthropic funding
+
+- One final potential funding source is philanthropic - from investors that just like your idea and want to see it work.  
+- For example, the [Breakthrough Initiatives](https://breakthroughinitiatives.org/about) are funded by a foundation established by Julia and Yuri Milner.
+
+---
+
+### Class discussion
+
+- How do you think funding priorities should be set, and how should funding be allocated?  
+- What issues do you see with the current system, and what would you propose to change things?
+
