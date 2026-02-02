@@ -31,7 +31,7 @@ importers:
         specifier: ^1.56.1
         version: 1.56.1
 
-  test/slidev-starter-1:
+  slides/slidev-starter-1:
     dependencies:
       '@slidev/cli':
         specifier: 'catalog:'
@@ -46,7 +46,7 @@ importers:
         specifier: 'catalog:'
         version: 3.5.17(typescript@5.9.3)
 
-  test/tech/slidev-starter-2:
+  slides/tech/slidev-starter-2:
     dependencies:
       '@slidev/cli':
         specifier: 'catalog:'
