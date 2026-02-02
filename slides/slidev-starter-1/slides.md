@@ -1,6 +1,6 @@
 ---
 title: SPCE 301 Week 01
-theme: Seriph
+theme: seriph
 revealOptions:
   transition: 'fade'
 
