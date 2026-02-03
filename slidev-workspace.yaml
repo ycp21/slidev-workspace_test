@@ -1,4 +1,5 @@
 baseUrl: /slidev-workspace_test
+slidesDir: ["./test"]
 
 hero:
   title: Slidev Workspace Starter
