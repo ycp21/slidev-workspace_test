@@ -4,6 +4,8 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
   strictDepBuilds: false
+  allowBuilds:
+    esbuild: true
 
 catalogs:
   default:
