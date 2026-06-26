@@ -3,8 +3,9 @@ lockfileVersion: '9.0'
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
-  strictDepBuilds: false
-  allowBuilds:
+
+strictDepBuilds: false
+allowBuilds:
     esbuild: true
 
 catalogs:
